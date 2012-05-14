@@ -1,0 +1,21 @@
+#! /usr/bin/python
+import os
+import time
+from sys import argv
+
+file_to_watch = {'name': argv[1]}
+temp_stat = os.stat(file_to_watch['name'])
+
+file_to_watch['last_mod_time'] = temp_stat.st_ctime
+file_to_generate = argv[2]
+
+while True:
+    mod_time = os.stat(file_to_watch['name']).st_ctime
+    
+    if (mod_time == file_to_watch['last_mod_time']):
+        time.sleep(1)
+    else:
+        print "Changes detected..."
+        pd_string = 'pandoc %s -o %s' % (file_to_watch['name'], file_to_generate)
+        os.system(pd_string)
+        file_to_watch['last_mod_time'] = mod_time
