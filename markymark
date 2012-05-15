@@ -21,6 +21,7 @@ except IndexError:
 else:
 	file_to_generate = argv[2]
 
+# when wait_display is 0 then the "Watching for changes" will appear
 wait_display = 0
 
 while True:
