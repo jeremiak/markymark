@@ -31,7 +31,11 @@ while True:
         wait_display = 1
 
     if (mod_time == file_to_watch['last_mod_time']):
-        time.sleep(1)
+        try:
+			time.sleep(1)
+        except KeyboardInterrupt:
+            print "\nEnding watch"
+            exit(1)
     else:
         print "Changes detected..."
         pd_string = 'pandoc %s -o %s' % (file_to_watch['name'], file_to_generate)
