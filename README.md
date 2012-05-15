@@ -3,6 +3,8 @@ MarkyMark
 
 Auto conversion from Markdown to HTML on each save
 
+![Yo Marky Marky](http://www.infamouskidd.com/wp-content/uploads/2011/12/marky-mark-e1325096787659.jpg)
+
 Usage
 ---
 `mm [source file].md [target file].html`
