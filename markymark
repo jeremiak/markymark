@@ -7,11 +7,23 @@ file_to_watch = {'name': argv[1]}
 temp_stat = os.stat(file_to_watch['name'])
 
 file_to_watch['last_mod_time'] = temp_stat.st_ctime
-file_to_generate = argv[2]
+
+try:
+	argv[2]
+except IndexError:
+	file_to_generate = "%s.html" % file_to_watch['name'].split('.')[0]
+else:
+	file_to_generate = argv[2]
+
+wait_display = 0
 
 while True:
     mod_time = os.stat(file_to_watch['name']).st_ctime
-    
+	
+    if (wait_display == 0):
+        print "Watching for changes"
+        wait_display = 1
+
     if (mod_time == file_to_watch['last_mod_time']):
         time.sleep(1)
     else:
@@ -19,3 +31,4 @@ while True:
         pd_string = 'pandoc %s -o %s' % (file_to_watch['name'], file_to_generate)
         os.system(pd_string)
         file_to_watch['last_mod_time'] = mod_time
+        wait_display = 0
