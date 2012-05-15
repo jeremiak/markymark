@@ -1,10 +1,16 @@
 #! /usr/bin/python
 import os
 import time
-from sys import argv
+from sys import argv, exit
 
-file_to_watch = {'name': argv[1]}
-temp_stat = os.stat(file_to_watch['name'])
+try:
+	argv[1]
+except IndexError:
+	print "Give at least one file"
+	exit(1)
+else:
+	file_to_watch = {'name': argv[1]}
+	temp_stat = os.stat(file_to_watch['name'])
 
 file_to_watch['last_mod_time'] = temp_stat.st_ctime
 
