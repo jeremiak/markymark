@@ -3,6 +3,7 @@ import os
 import time
 from sys import argv, exit
 
+# handle the first file, if it is present or not
 try:
 	argv[1]
 except IndexError:
@@ -14,6 +15,7 @@ else:
 
 file_to_watch['last_mod_time'] = temp_stat.st_ctime
 
+# handle the second file, if it is present or not
 try:
 	argv[2]
 except IndexError:
@@ -24,6 +26,7 @@ else:
 # when wait_display is 0 then the "Watching for changes" will appear
 wait_display = 0
 
+# enter the loop that watches for changes and then converts to html
 while True:
     mod_time = os.stat(file_to_watch['name']).st_ctime
 	
